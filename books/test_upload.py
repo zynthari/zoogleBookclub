@@ -62,9 +62,7 @@ class LibraryUploadTests(SimpleTestCase):
             {"file": SimpleUploadedFile("books.json", b"x" * 1025)},
         ):
             with self.subTest(data=data):
-                response = self.client.post(
-                    "/books/upload_library", data, HTTP_X_CSRFTOKEN=token
-                )
+                response = self.client.post("/books/upload_library", data, HTTP_X_CSRFTOKEN=token)
                 self.assertEqual(response.status_code, 400)
         importer.assert_not_called()
 

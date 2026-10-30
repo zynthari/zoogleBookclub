@@ -18,9 +18,7 @@ class Command(BaseCommand):
         if not path.is_absolute():
             path = settings.BASE_DIR / path
         try:
-            count = enrich_book_collection(
-                collection_name=options["collection"], json_file=path
-            )
+            count = enrich_book_collection(collection_name=options["collection"], json_file=path)
         except (OSError, ValueError) as exc:
             raise CommandError(str(exc)) from exc
 

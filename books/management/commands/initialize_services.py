@@ -36,7 +36,8 @@ class Command(BaseCommand):
         model = settings.OLLAMA_EMBEDDING_MODEL
         data = json.dumps({"model": model}).encode()
         request = Request(
-            f"{base_url}/api/show", data=data,
+            f"{base_url}/api/show",
+            data=data,
             headers={"Content-Type": "application/json"},
         )
         try:
@@ -69,7 +70,10 @@ class Command(BaseCommand):
         manager = QdrantManager()
         if manager.client.collection_exists(collection_name):
             vectors = manager.client.get_collection(collection_name).config.params.vectors
-            if getattr(vectors, "size", None) != size or getattr(vectors, "distance", None) != Distance.COSINE:
+            if (
+                getattr(vectors, "size", None) != size
+                or getattr(vectors, "distance", None) != Distance.COSINE
+            ):
                 raise CommandError(
                     f"Коллекция {collection_name} несовместима с выбранной моделью "
                     f"(ожидается размерность {size}, метрика Cosine). Данные не изменены."

@@ -4,6 +4,7 @@ from openai import OpenAI
 
 from django.conf import settings
 
+
 class LLMManager:
     def __init__(self):
         self.client = OpenAI(

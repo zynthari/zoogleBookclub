@@ -14,8 +14,6 @@ def get_dimension() -> int:
         case "Ollama":
             model = OllamaManager()
         case _:
-            raise BadEmbeddingModel(
-                f"Неизвестный embedding-провайдер: {settings.EMBEDDING_MODE}"
-            )
+            raise BadEmbeddingModel(f"Неизвестный embedding-провайдер: {settings.EMBEDDING_MODE}")
 
     return len(model.encode("Определение размерности embedding-модели"))

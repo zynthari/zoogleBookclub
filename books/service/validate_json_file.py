@@ -4,6 +4,7 @@ import json
 class WrongJSONFormat(ValueError):
     pass
 
+
 class WrongBookFormat(ValueError):
     pass
 

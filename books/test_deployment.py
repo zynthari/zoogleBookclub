@@ -24,7 +24,9 @@ class DeploymentCommandTests(SimpleTestCase):
         manager.return_value.create_collection.assert_not_called()
         dimension.assert_not_called()
 
-    @patch("books.management.commands.enrich_book_collection.enrich_book_collection", return_value=47)
+    @patch(
+        "books.management.commands.enrich_book_collection.enrich_book_collection", return_value=47
+    )
     def test_import_defaults_to_catalog_in_project(self, importer):
         call_command("enrich_book_collection", stdout=StringIO())
         importer.assert_called_once_with(

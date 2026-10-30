@@ -27,17 +27,20 @@ def get_question(request):
 
     return HttpResponse(result)
 
+
 @require_POST
 def upload_library(request):
     library = request.FILES.get("file")
 
     validator = MinimalFileValidator(
         allowed_extensions=["json"],
-        message="Разрешены только JSON-файлы для пополнения библиотеки!"
+        message="Разрешены только JSON-файлы для пополнения библиотеки!",
     )
     try:
         validator(library)
-        renewed_books_count = enrich_book_collection(collection_name="sample_collection", json_file=library)
+        renewed_books_count = enrich_book_collection(
+            collection_name="sample_collection", json_file=library
+        )
         if renewed_books_count > 0:
             return HttpResponse(f"В библиотеке обновлено {renewed_books_count} книг!", status=200)
         else:
@@ -46,4 +49,3 @@ def upload_library(request):
         return HttpResponse("; ".join(e.messages), status=400)
     except Exception as e:
         return HttpResponse(str(e), status=400)
-

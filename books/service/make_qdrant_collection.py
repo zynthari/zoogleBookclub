@@ -5,10 +5,12 @@ from qdrant_client.models import Distance, VectorParams
 from books.service.get_dimension import get_dimension
 
 
-def make_qdrant_collection(collection_name = "sample_collection"):
+def make_qdrant_collection(collection_name="sample_collection"):
     size = get_dimension()
     # подключаемся к Qdrant
-    client = QdrantClient(url=settings.QDRANT_URL,)
+    client = QdrantClient(
+        url=settings.QDRANT_URL,
+    )
 
     if client.collection_exists(collection_name):
         print(f"Коллекция '{collection_name}' уже существует")

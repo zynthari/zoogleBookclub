@@ -5,7 +5,7 @@ from books.integrations.Embeddings.base import BaseEmbeddingModel
 
 class SentenceTransformerManager(BaseEmbeddingModel):
     def __init__(self):
-        self.model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+        self.model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
         super().__init__()
 
     def encode(self, text: str):

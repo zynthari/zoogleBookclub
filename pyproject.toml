@@ -11,7 +11,8 @@ dependencies = [
     "django (>=6.1.2,<7.0.0)",
     "sentence-transformers (>=6.1.0,<7.0.0)",
     "qdrant-client (>=1.19.1,<2.0.0)",
-    "openai (>=3.37.0,<4.0.0)"
+    "openai (>=3.37.0,<4.0.0)",
+    "ruff (>=0.17.3,<0.18.0)"
 ]
 
 
@@ -21,3 +22,17 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 package-mode = false
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+extend-exclude = ["books/migrations"]
+
+[tool.ruff.lint]
+select = [
+    "E4",  # ошибки импортов
+    "E7",  # ошибки выражений
+    "E9",  # синтаксические ошибки
+    "F",   # неиспользуемые импорты, неопределённые имена
+    "I",   # сортировка импортов
+]

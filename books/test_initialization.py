@@ -31,7 +31,9 @@ class InitializationTests(SimpleTestCase):
         manager.return_value.create_collection.assert_called_once_with(
             collection_name="sample_collection", size=768
         )
-        self.assertFalse(any("/api/pull" in call.args[0].full_url for call in request.call_args_list))
+        self.assertFalse(
+            any("/api/pull" in call.args[0].full_url for call in request.call_args_list)
+        )
         migrate.assert_called_once()
         self.assertEqual(migrate.call_args.args[0], "migrate")
 
@@ -41,7 +43,8 @@ class InitializationTests(SimpleTestCase):
     @patch("books.management.commands.initialize_services.urlopen")
     def test_missing_model_is_downloaded(self, request, manager, dimension, migrate):
         request.side_effect = [
-            response({}), response({}),
+            response({}),
+            response({}),
             HTTPError("http://ollama/api/show", 404, "Not found", {}, None),
             response({"status": "success"}),
         ]
@@ -59,9 +62,9 @@ class InitializationTests(SimpleTestCase):
         request.side_effect = [response({}), response({}), response({})]
         manager.return_value.client.collection_exists.return_value = True
         manager.return_value.client.get_collection.return_value = SimpleNamespace(
-            config=SimpleNamespace(params=SimpleNamespace(
-                vectors=SimpleNamespace(size=768, distance=Distance.COSINE)
-            ))
+            config=SimpleNamespace(
+                params=SimpleNamespace(vectors=SimpleNamespace(size=768, distance=Distance.COSINE))
+            )
         )
         call_command("initialize_services", stdout=StringIO())
         manager.return_value.create_collection.assert_not_called()
@@ -71,13 +74,15 @@ class InitializationTests(SimpleTestCase):
     @patch("books.management.commands.initialize_services.get_dimension", return_value=768)
     @patch("books.management.commands.initialize_services.QdrantManager")
     @patch("books.management.commands.initialize_services.urlopen")
-    def test_incompatible_collection_stops_initialization_without_deleting_data(self, request, manager, dimension, migrate):
+    def test_incompatible_collection_stops_initialization_without_deleting_data(
+        self, request, manager, dimension, migrate
+    ):
         request.side_effect = [response({}), response({}), response({})]
         manager.return_value.client.collection_exists.return_value = True
         manager.return_value.client.get_collection.return_value = SimpleNamespace(
-            config=SimpleNamespace(params=SimpleNamespace(
-                vectors=SimpleNamespace(size=384, distance=Distance.COSINE)
-            ))
+            config=SimpleNamespace(
+                params=SimpleNamespace(vectors=SimpleNamespace(size=384, distance=Distance.COSINE))
+            )
         )
         with self.assertRaises(CommandError):
             call_command("initialize_services", stdout=StringIO())

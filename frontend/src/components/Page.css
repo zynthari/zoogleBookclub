@@ -1,0 +1,60 @@
+.bookclub-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.bookclub-page .bookclub-card {
+  position: relative;
+  min-height: 400px;
+  min-width: 0;
+  width: 100%;
+  max-width: 700px;
+  border: 2px solid red;
+  background-color: #fff0f0;
+}
+
+.bookclub-card .ant-card-head-title {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.bookclub-card .bookclub-upload-button {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+}
+
+.bookclub-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 72px;
+}
+
+.question-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.question-form__actions {
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+@media (max-width: 480px) {
+  .bookclub-page {
+    padding: 12px;
+  }
+
+  .bookclub-card .ant-card-body,
+  .bookclub-card .ant-card-head {
+    padding-inline: 16px;
+  }
+}

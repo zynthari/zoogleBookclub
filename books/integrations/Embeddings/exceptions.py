@@ -1,0 +1,2 @@
+class BadEmbeddingModel(Exception):
+    pass

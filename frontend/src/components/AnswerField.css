@@ -1,0 +1,32 @@
+.answer {
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.answer p {
+  margin: 0 0 0.85em;
+}
+
+.answer ol,
+.answer ul {
+  margin: 0 0 1em;
+  padding-inline-start: 1.6em;
+}
+
+.answer li + li {
+  margin-top: 1em;
+}
+
+.answer li > p:last-child {
+  margin-bottom: 0;
+}
+
+.answer strong {
+  font-weight: 700;
+}
+
+.answer > :last-child {
+  margin-bottom: 0;
+}
